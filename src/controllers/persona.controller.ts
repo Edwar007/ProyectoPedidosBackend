@@ -92,7 +92,6 @@ export class PersonaController {
         console.log(data);
       });
       return p;
-//${Llaves.urlServicioNotificaciones}
   }
 
   @get('/personas/count')

@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -20,6 +21,7 @@ import {
 import {Pedido} from '../models';
 import {PedidoRepository} from '../repositories';
 
+@authenticate('client')
 export class PedidoController {
   constructor(
     @repository(PedidoRepository)
