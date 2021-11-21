@@ -1,18 +1,18 @@
+import {AuthenticationComponent, registerAuthenticationStrategy} from '@loopback/authentication';
 import {BootMixin} from '@loopback/boot';
 import {ApplicationConfig} from '@loopback/core';
-import {
-  RestExplorerBindings,
-  RestExplorerComponent,
-} from '@loopback/rest-explorer';
 import {RepositoryMixin} from '@loopback/repository';
 import {RestApplication} from '@loopback/rest';
+import {
+  RestExplorerBindings,
+  RestExplorerComponent
+} from '@loopback/rest-explorer';
 import {ServiceMixin} from '@loopback/service-proxy';
 import path from 'path';
-import {MySequence} from './sequence';
-import { AuthenticationComponent, registerAuthenticationStrategy } from '@loopback/authentication';
-import { EstrategiaAdministrador } from './estrategias/admin.strategy';
+import {EstrategiaAdministrador} from './estrategias/admin.strategy';
 import {EstrategiaAsesor} from './estrategias/asesor.strategy';
 import {EstrategiaClient} from './estrategias/client.strategy';
+import {MySequence} from './sequence';
 export {ApplicationConfig};
 
 export class App extends BootMixin(
@@ -25,7 +25,7 @@ export class App extends BootMixin(
     this.sequence(MySequence);
 
     // Set up default home page
-    this.static('/', path.join(__dirname, '../public'));
+    this.static('/', path.join(__dirname, '../public/html'));
 
     // Customize @loopback/rest-explorer configuration here
     this.configure(RestExplorerBindings.COMPONENT).to({
