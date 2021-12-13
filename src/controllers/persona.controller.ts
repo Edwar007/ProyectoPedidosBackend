@@ -25,6 +25,7 @@ import {PersonaRepository} from '../repositories';
 import {AutenticacionService} from '../services';
 const fetch = require("node-fetch");
 
+
 export class PersonaController {
   constructor(
     @repository(PersonaRepository)
@@ -84,13 +85,21 @@ export class PersonaController {
       //notificacion usuario
       let p= await this.personaRepository.create(persona); //manda a la base de datos de mongo db
       let destino = persona.correo;
+      let celular = persona.celular;
       let asunto = "Registro en la app Pedidos";
       let contenido = `Hola, ${persona.nombres}, su usuario para el acceso a la aplicacion es:${persona.correo} y su contraseña es: ${clave}`;
       //comunicacion con Spider
+
       fetch(`${Llaves.urlServicioNotificaciones}/notificacion-email?correo-destino=${destino}&asunto=${asunto}&contenido=${contenido} `)
       .then((data:any)=>{
         console.log(data);
       });
+
+      fetch(`${Llaves.urlServicioNotificaciones}/sms?mensaje=${contenido}&telefono=${celular} `)
+      .then((data:any)=>{
+        console.log(data);
+      });
+
       return p;
   }
 
